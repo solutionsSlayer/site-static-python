@@ -63,11 +63,16 @@ def generate_home_page(output_file):
             content = f.read()
             md = markdown.Markdown(extensions=['meta'])
             html = md.convert(content)
+            
+            # Extract the news number from the filename
+            news_number = file.split('-')[-1].split('.')[0]
+            news_page = f"evenement-{news_number}.html"
+            
             news_list.append({
                 'title': md.Meta.get('title', [os.path.splitext(file)[0]])[0],
                 'date': md.Meta.get('date', [''])[0],
                 'summary': md.Meta.get('summary', [''])[0] if 'summary' in md.Meta else html[:200] + '...',
-                'link': os.path.splitext(file)[0] + '.html'
+                'link': news_page
             })
 
     news_list.sort(key=lambda x: x['date'], reverse=True)
