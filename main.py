@@ -268,7 +268,12 @@ def generate_events_page(output_file):
         file.write(html_content)
 
 if __name__ == "__main__":
+    from build_scss import compile_scss
+    
     os.makedirs('public', exist_ok=True)
+    
+    compile_scss()
+    print("SCSS compiled to CSS")
 
     csv_file = "assets/csv/membres-bureau-association.csv"
     bureau_output_file = "bureau.html"

@@ -59,6 +59,7 @@ Ce script va :
 - Créer la page d'accueil avec les actualités
 - Générer les pages individuelles pour chaque événement
 - Créer la page listant tous les événements
+- Créer le fichier CSS à partir du fichier SCSS
 
 ## Membres du groupe
 
@@ -78,6 +79,18 @@ Ce script va :
 "liveServer.settings.port": 5501,
 "liveServer.settings.root": "/public"
 ```
+
+## SCSS Build Commands
+
+# One-time build:
+python3 build_scss.py
+
+# Watch for changes (development):
+watchmedo shell-command \
+    --patterns="*.scss" \
+    --recursive \
+    --command='python3 build_scss.py' \
+    scss/
 
 ## Remarques
 
