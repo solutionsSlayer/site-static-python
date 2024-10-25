@@ -28,15 +28,27 @@ Ce projet est un générateur de site web statique pour l'association "Vivre aux
 
 5. Installez les dépendances Python :
    ```
-   pip3 install markdown
+   pip3 install -r requirements.txt
    ```
+
+## Dépendances Python
+
+Ce projet utilise les bibliothèques Python suivantes :
+
+- markdown : pour convertir le contenu Markdown en HTML
+- csv : (module standard) pour lire les fichiers CSV
+- os : (module standard) pour les opérations sur le système de fichiers
+- glob : (module standard) pour trouver les fichiers correspondant à un motif
+- datetime : (module standard) pour manipuler les dates et heures
+
+Ces dépendances sont listées dans le fichier `requirements.txt` et seront installées automatiquement lors de l'étape 5 de l'installation.
 
 ## Commandes de build
 
 Pour générer le site, exécutez le script Python principal :
 
 ```
-python3 generate_site.py
+python3 main.py
 ```
 
 Ce script va :
@@ -52,14 +64,21 @@ Ce script va :
 
 ## Structure du projet
 
-- `generate_site.py`: Script principal pour la génération du site
+- `main.py`: Script principal pour la génération du site
 - `*.md`: Fichiers Markdown contenant le contenu des événements
 - `*.html`: Fichiers HTML générés
 - `styles.css`: Feuille de style CSS pour le site
 
+## Vscode live server
+
+```
+"liveServer.settings.port": 5501,
+"liveServer.settings.root": "/public"
+```
+
 ## Remarques
 
-- Assurez-vous que tous les fichiers Markdown des événements sont dans le même répertoire que le script `generate_site.py`.
+- Assurez-vous que tous les fichiers Markdown des événements sont dans le même répertoire que le script `main.py`.
 - Les images des événements doivent être nommées `evenement-X.webp`, où X est le numéro de l'événement.
 - Le fichier CSV contenant les informations des membres du bureau doit être présent dans le répertoire (le nom du fichier est à spécifier dans le script).
 

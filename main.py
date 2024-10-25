@@ -2,7 +2,6 @@ import csv
 import os
 import markdown
 import glob
-import re
 from datetime import datetime
 
 def generate_bureau_page(csv_file, output_file):
@@ -54,16 +53,17 @@ def generate_bureau_page(csv_file, output_file):
     </html>
     """
 
-    with open(output_file, 'w', encoding='utf-8') as file:
+    output_path = os.path.join('public', output_file)
+    with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)
 
 def generate_home_page(output_file):
-    news_files = glob.glob('*.md')
+    news_files = glob.glob('assets/md/*.md')
     news_list = []
 
     for file in news_files:
         # Skip the README file
-        if file.lower() == 'readme.md':
+        if os.path.basename(file).lower() == 'readme.md':
             continue
 
         with open(file, 'r', encoding='utf-8') as f:
@@ -71,12 +71,12 @@ def generate_home_page(output_file):
             md = markdown.Markdown(extensions=['meta'])
             html = md.convert(content)
             
-            title = md.Meta.get('title', [os.path.splitext(file)[0]])[0]
+            title = md.Meta.get('title', [os.path.splitext(os.path.basename(file))[0]])[0]
             date_str = md.Meta.get('date', [''])[0]
             summary = md.Meta.get('summary', [''])[0] if 'summary' in md.Meta else html[:200] + '...'
             
             # Extract event number from filename
-            event_number = file.split('-')[-1].split('.')[0]
+            event_number = os.path.basename(file).split('-')[-1].split('.')[0]
             # Create link using the same format as in generate_events_page
             link = f"evenement-{event_number}.html"
             
@@ -143,7 +143,8 @@ def generate_home_page(output_file):
     </html>
     """
 
-    with open(output_file, 'w', encoding='utf-8') as file:
+    output_path = os.path.join('public', output_file)
+    with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)
 
 def generate_event_page(event, output_file):
@@ -182,11 +183,12 @@ def generate_event_page(event, output_file):
     </html>
     """
 
-    with open(output_file, 'w', encoding='utf-8') as file:
+    output_path = os.path.join('public', output_file)
+    with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)
 
 def generate_events_page(output_file):
-    event_files = glob.glob('*.md')
+    event_files = glob.glob('assets/md/*.md')
     events_list = []
 
     for file in event_files:
@@ -194,18 +196,21 @@ def generate_events_page(output_file):
             content = f.read()
             md = markdown.Markdown(extensions=['meta'])
             html_content = md.convert(content)
-            title = md.Meta.get('title', [os.path.splitext(file)[0]])[0]
+            title = md.Meta.get('title', [os.path.splitext(os.path.basename(file))[0]])[0]
             date = md.Meta.get('date', [''])[0]
             
-            event_number = file.split('-')[-1].split('.')[0]
-            image_file = f"evenement-{event_number}.webp"
+            event_number = os.path.basename(file).split('-')[-1].split('.')[0]
+            original_image_file = f"assets/images/evenement-{event_number}.webp"
+            public_image_file = f"images/evenement-{event_number}.webp"
             event_page = f"evenement-{event_number}.html"
+            
+            os.makedirs(os.path.join('public', 'images'), exist_ok=True)
             
             event = {
                 'title': title,
                 'date': date,
                 'content': html_content,
-                'image': image_file,
+                'image': public_image_file,
                 'page': event_page
             }
             events_list.append(event)
@@ -258,19 +263,23 @@ def generate_events_page(output_file):
     </html>
     """
 
-    with open(output_file, 'w', encoding='utf-8') as file:
+    output_path = os.path.join('public', output_file)
+    with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)
 
 if __name__ == "__main__":
-    csv_file = "membres-bureau-association.csv"
+    # Create the 'public' directory if it doesn't exist
+    os.makedirs('public', exist_ok=True)
+
+    csv_file = "assets/csv/membres-bureau-association.csv"
     bureau_output_file = "bureau.html"
     generate_bureau_page(csv_file, bureau_output_file)
-    print(f"Page générée : {bureau_output_file}")
+    print(f"Page générée : public/{bureau_output_file}")
 
     home_output_file = "index.html"
     generate_home_page(home_output_file)
-    print(f"Page générée : {home_output_file}")
+    print(f"Page générée : public/{home_output_file}")
 
     events_output_file = "evenements.html"
     generate_events_page(events_output_file)
-    print(f"Page générée : {events_output_file}")
+    print(f"Page générée : public/{events_output_file}")
