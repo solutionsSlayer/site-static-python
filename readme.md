@@ -2,6 +2,9 @@
 
 Ce projet est un générateur de site web statique pour l'association "Vivre aux Lilas". Il utilise Python pour générer des pages HTML à partir de fichiers Markdown et CSV.
 
+## Maquette FIGMA
+[Maquette figma](https://www.figma.com/design/nZNGPEDXP728j6Qiu0pMpD/html.to.design-%E2%80%94-Import-websites-to-Figma-designs-(web%2Chtml%2Ccss)-(Community)?node-id=2-3&node-type=canvas) 
+
 ## Prérequis système
 
 - Python 3.7 ou supérieur
@@ -81,5 +84,6 @@ Ce script va :
 - Assurez-vous que tous les fichiers Markdown des événements sont dans le même répertoire que le script `main.py`.
 - Les images des événements doivent être nommées `evenement-X.webp`, où X est le numéro de l'événement.
 - Le fichier CSV contenant les informations des membres du bureau doit être présent dans le répertoire (le nom du fichier est à spécifier dans le script).
+- Site web responsive
 
 Pour toute question ou problème, veuillez contacter les membres du groupe mentionnés ci-dessus.

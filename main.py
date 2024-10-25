@@ -268,7 +268,6 @@ def generate_events_page(output_file):
         file.write(html_content)
 
 if __name__ == "__main__":
-    # Create the 'public' directory if it doesn't exist
     os.makedirs('public', exist_ok=True)
 
     csv_file = "assets/csv/membres-bureau-association.csv"
