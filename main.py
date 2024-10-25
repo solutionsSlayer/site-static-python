@@ -182,7 +182,7 @@ def generate_event_page(event, output_file):
             </nav>
         </header>
         <main>
-            <article classs="event-page">>
+            <article classs="event-page">
                 <h2>{event['title']}</h2>
                 <p class="date">{event['date']}</p>
                 <img src="{event['image']}" alt="Illustration pour {event['title']}" class="event-image">

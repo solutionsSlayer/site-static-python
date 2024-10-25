@@ -1,5 +1,4 @@
 import sass
-import os
 
 def compile_scss():
     scss_path = 'scss/main.scss'
