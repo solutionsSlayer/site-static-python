@@ -53,6 +53,7 @@ def generate_bureau_page(csv_file, output_file):
     </html>
     """
 
+    os.makedirs('public', exist_ok=True)
     output_path = os.path.join('public', output_file)
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)
@@ -127,7 +128,7 @@ def generate_home_page(output_file):
     """
 
     for news in news_list:
-        formatted_date = news['date'].strftime('%d %B %Y')
+        formatted_date = news['date'].strftime('%Y-%m-%d')
         html_content += f"""
                 <article class="news-card">
                     <div>
@@ -154,9 +155,11 @@ def generate_home_page(output_file):
     </html>
     """
 
+    os.makedirs('public', exist_ok=True)
     output_path = os.path.join('public', output_file)
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)
+
 def generate_event_page(event, output_file):
     html_content = f"""
     <!DOCTYPE html>
@@ -193,6 +196,7 @@ def generate_event_page(event, output_file):
     </html>
     """
 
+    os.makedirs('public', exist_ok=True)
     output_path = os.path.join('public', output_file)
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)
@@ -273,6 +277,7 @@ def generate_events_page(output_file):
     </html>
     """
 
+    os.makedirs('public', exist_ok=True)
     output_path = os.path.join('public', output_file)
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)
@@ -297,3 +302,4 @@ if __name__ == "__main__":
     events_output_file = "evenements.html"
     generate_events_page(events_output_file)
     print(f"Page générée : public/{events_output_file}")
+

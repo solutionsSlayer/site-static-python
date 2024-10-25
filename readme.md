@@ -39,10 +39,14 @@ Ce projet est un générateur de site web statique pour l'association "Vivre aux
 Ce projet utilise les bibliothèques Python suivantes :
 
 - markdown : pour convertir le contenu Markdown en HTML
+- libsass : pour compiler les fichiers SCSS en CSS
+- watchdog : pour surveiller les changements des fichiers SCSS
+- pytest : pour exécuter les tests unitaires
 - csv : (module standard) pour lire les fichiers CSV
 - os : (module standard) pour les opérations sur le système de fichiers
 - glob : (module standard) pour trouver les fichiers correspondant à un motif
 - datetime : (module standard) pour manipuler les dates et heures
+
 
 Ces dépendances sont listées dans le fichier `requirements.txt` et seront installées automatiquement lors de l'étape 5 de l'installation.
 
@@ -60,6 +64,12 @@ Ce script va :
 - Générer les pages individuelles pour chaque événement
 - Créer la page listant tous les événements
 - Créer le fichier CSS à partir du fichier SCSS
+
+## Test unitaire
+
+```
+python -m pytest tests/test_main.py -v
+```
 
 ## Membres du groupe
 
