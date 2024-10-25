@@ -20,7 +20,7 @@ def generate_bureau_page(csv_file, output_file):
     </head>
     <body>
         <header>
-            <h1>Vivre aux lilas</h1>
+            <h1 class="title-lila">Vivre aux lilas</h1>
             <nav>
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
@@ -87,11 +87,15 @@ def generate_home_page(output_file):
                 # If date parsing fails, use the file modification time as a fallback
                 date = datetime.fromtimestamp(os.path.getmtime(file))
             
+            # Add image path using the same event number pattern
+            image_path = f"images/evenement-{event_number}.webp"
+            
             news_list.append({
                 'title': title,
                 'date': date,
                 'summary': summary,
-                'link': link
+                'link': link,
+                'image': image_path  # Add image to the news item
             })
 
     news_list.sort(key=lambda x: x['date'], reverse=True)
@@ -108,7 +112,7 @@ def generate_home_page(output_file):
     </head>
     <body>
         <header>
-            <h1>Vivre aux lilas</h1>
+            <h1 class="title-lila">Vivre aux lilas</h1>
             <nav>
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
@@ -126,10 +130,17 @@ def generate_home_page(output_file):
         formatted_date = news['date'].strftime('%d %B %Y')
         html_content += f"""
                 <article class="news-card">
-                    <h3><a href="{news['link']}">{news['title']}</a></h3>
-                    <p class="date">{formatted_date}</p>
-                    <p class="summary">{news['summary']}</p>
-                    <a href="{news['link']}" class="read-more">Lire la suite</a>
+                    <div>
+                        <img src="{news['image']}" alt="Illustration pour {news['title']}" class="event-image">
+                        <h3><a href="{news['link']}">{news['title']}</a></h3>
+                        <p class="date">{formatted_date}</p>
+                    </div>
+                    <div>
+                       <p class="summary">{news['summary']}</p>
+                    </div>
+                    <div>
+                        <a href="{news['link']}" class="read-more">Lire la suite</a>
+                    </div>
                 </article>
         """
 
@@ -137,7 +148,7 @@ def generate_home_page(output_file):
             </div>
         </main>
         <footer>
-            <p>&copy; 2024 Vivre aux lilas. Tous droits réservés.</p>
+            <p>© 2024 Vivre aux lilas. Tous droits réservés.</p>
         </footer>
     </body>
     </html>
@@ -146,7 +157,6 @@ def generate_home_page(output_file):
     output_path = os.path.join('public', output_file)
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)
-
 def generate_event_page(event, output_file):
     html_content = f"""
     <!DOCTYPE html>
@@ -159,7 +169,7 @@ def generate_event_page(event, output_file):
     </head>
     <body>
         <header>
-            <h1>Vivre aux lilas</h1>
+            <h1 class="title-lila">Vivre aux lilas</h1>
             <nav>
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
@@ -169,7 +179,7 @@ def generate_event_page(event, output_file):
             </nav>
         </header>
         <main>
-            <article>
+            <article classs="event-page">>
                 <h2>{event['title']}</h2>
                 <p class="date">{event['date']}</p>
                 <img src="{event['image']}" alt="Illustration pour {event['title']}" class="event-image">
@@ -230,7 +240,7 @@ def generate_events_page(output_file):
     </head
     <body>
         <header>
-            <h1>Vivre aux lilas</h1>
+            <h1 class="title-lila">Vivre aux lilas</h1>
             <nav>
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
