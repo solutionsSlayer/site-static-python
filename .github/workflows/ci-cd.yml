@@ -38,8 +38,14 @@ jobs:
         echo "Setting up wwwroot structure..."
         mkdir -p wwwroot/images
         
+        echo "Setting assets directory..."
+        mkdir -p wwwroot/assets
+        
         echo "Copying files to wwwroot..."
         cp -r public/* wwwroot/ || true
+
+        echo "Copying assets to wwwroot..."
+        cp -r assets/* wwwroot/assets/
         
         echo "Build completed successfully"
 
