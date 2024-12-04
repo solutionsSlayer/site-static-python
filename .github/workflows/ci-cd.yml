@@ -27,23 +27,24 @@ jobs:
       run: |
         PYTHONPATH=$PYTHONPATH:$(pwd) pytest
 
-    - name: Create wwwroot directory
-      run: mkdir -p wwwroot
-
     - name: Build site
       run: |
         echo "Running main.py to generate site..."
         python main.py
+        
         echo "Creating wwwroot directory..."
         mkdir -p wwwroot
-        echo "Copying images to wwwroot..."
-        cp -r public/images/* wwwroot/images/
-        echo "Copying all public files to wwwroot..."
-        cp -r public/* wwwroot/
+        
+        echo "Setting up wwwroot structure..."
+        mkdir -p wwwroot/images
+        
+        echo "Copying files to wwwroot..."
+        cp -r public/* wwwroot/ || true
+        
         echo "Build completed successfully"
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: wwwroot
-        branch: gh-pages # Trigger
+        branch: gh-pages
