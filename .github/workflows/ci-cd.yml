@@ -32,10 +32,15 @@ jobs:
 
     - name: Build site
       run: |
+        echo "Running main.py to generate site..."
         python main.py
+        echo "Creating wwwroot directory..."
         mkdir -p wwwroot
+        echo "Copying images to wwwroot..."
         cp -r public/images/* wwwroot/images/
+        echo "Copying all public files to wwwroot..."
         cp -r public/* wwwroot/
+        echo "Build completed successfully"
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
