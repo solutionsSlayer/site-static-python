@@ -30,7 +30,21 @@ jobs:
     - name: Build site
       run: |
         echo "Running main.py to generate site..."
+        
+        # Create required directories
+        mkdir -p assets/md
+        mkdir -p assets/images
+        mkdir -p assets/csv
+        
+        # Debug: List contents of assets directory
+        echo "Contents of assets directory:"
+        ls -R assets/
+        
         python main.py
+        
+        # Debug: List contents of public directory
+        echo "Contents of public directory:"
+        ls -R public/
         
         echo "Creating wwwroot directory..."
         mkdir -p wwwroot

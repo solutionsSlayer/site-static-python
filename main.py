@@ -61,17 +61,25 @@ def generate_bureau_page(csv_file, output_file):
 
 def generate_home_page(output_file):
     news_files = glob.glob('assets/md/*.md')
+    print(f"Found {len(news_files)} markdown files: {news_files}")  # Debug logging
     news_list = []
 
     for file in news_files:
         # Skip the README file
         if os.path.basename(file).lower() == 'readme.md':
             continue
-
+            
+        print(f"Processing file: {file}")  # Debug logging
+        
         with open(file, 'r', encoding='utf-8') as f:
             content = f.read()
             md = markdown.Markdown(extensions=['meta'])
             html = md.convert(content)
+            
+            # Debug logging
+            print(f"Metadata for {file}:")
+            print(f"- Title: {md.Meta.get('title', ['No title'])}")
+            print(f"- Date: {md.Meta.get('date', ['No date'])}")
             
             title = md.Meta.get('title', [os.path.splitext(os.path.basename(file))[0]])[0]
             date_str = md.Meta.get('date', [''])[0]
