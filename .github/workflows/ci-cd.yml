@@ -25,7 +25,7 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest
+        PYTHONPATH=$PYTHONPATH:$(pwd) pytest
 
     - name: Create wwwroot directory
       run: mkdir -p wwwroot
