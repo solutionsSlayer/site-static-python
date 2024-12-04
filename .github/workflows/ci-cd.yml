@@ -39,4 +39,4 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: wwwroot
-        branch: gh-pages
+        branch: gh-pages # Trigger
