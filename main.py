@@ -3,6 +3,7 @@ import os
 import markdown
 import glob
 from datetime import datetime
+import shutil
 
 def generate_bureau_page(csv_file, output_file):
     with open(csv_file, 'r', encoding='utf-8') as file:
@@ -286,6 +287,11 @@ if __name__ == "__main__":
     from build_scss import compile_scss
     
     os.makedirs('public', exist_ok=True)
+    os.makedirs('public/images', exist_ok=True)
+    
+    for image in glob.glob('assets/images/*.webp'):
+        shutil.copy2(image, os.path.join('public/images', os.path.basename(image)))
+    print("Images copiées vers public/images/")
     
     compile_scss()
     print("SCSS compiled to CSS")
