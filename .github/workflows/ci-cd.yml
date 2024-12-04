@@ -33,8 +33,9 @@ jobs:
     - name: Build site
       run: |
         python main.py
+        mkdir -p wwwroot
+        cp -r public/images/* wwwroot/images/
         cp -r public/* wwwroot/
-        cp -r assets/* wwwroot/assets/
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
