@@ -31,37 +31,13 @@ jobs:
       run: |
         echo "Running main.py to generate site..."
         
-        # Create required directories
-        mkdir -p assets/md
-        mkdir -p assets/images
-        mkdir -p assets/csv
-        
-        # Debug: List contents of assets directory
-        echo "Contents of assets directory:"
-        ls -R assets/
-        
         python main.py
-        
-        # Debug: List contents of public directory
-        echo "Contents of public directory:"
-        ls -R public/
         
         echo "Creating wwwroot directory..."
         mkdir -p wwwroot
         
-        echo "Setting up wwwroot structure..."
-        mkdir -p wwwroot/images
-        
-        echo "Setting assets directory..."
-        mkdir -p wwwroot/assets
-        
         echo "Copying files to wwwroot..."
         cp -r public/* wwwroot/ || true
-
-        echo "Copying assets to wwwroot..."
-        cp -r assets/* wwwroot/assets/
-        
-        echo "Build completed successfully"
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
