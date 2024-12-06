@@ -39,6 +39,16 @@ jobs:
         echo "Copying files to wwwroot..."
         cp -r public/* wwwroot/ || true
 
+        ls -la wwwroot
+
+    - name: Install HTML validator
+      run: sudo apt-get update && sudo apt-get install -y tidy
+
+    - name: Validate HTML
+      run: |
+        echo "Validating HTML files..."
+        find wwwroot -name "*.html" -exec tidy -e {} \; || exit 1
+
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
