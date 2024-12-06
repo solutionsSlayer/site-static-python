@@ -54,3 +54,10 @@ jobs:
       with:
         folder: wwwroot
         branch: gh-pages
+
+    - name: Wait for GitHub Pages
+      run: sleep 60
+
+    - name: Smoke test deployed site
+      run: |
+        curl -s https://solutionsslayer.github.io/site-static-python/ | grep "Vivre aux Lilas" || exit 1
